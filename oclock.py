@@ -1,5 +1,6 @@
 import datetime
 import time
+from termcolor import cprint
 
 def time_as_sentence(hour, minute):
     hour_as_text = ['nula', 'jedna', 'dvě', 'tři', 'čtyři', 
@@ -68,9 +69,9 @@ def simulate_oclock(letters, lights):
     for r in range(10):
         for c in range(11):
             if lights[r][c] == '1':
-                print(letters[r][c], end=' ')
+                cprint(letters[r][c], 'white', attrs=['bold'], end=' ')
             else:
-                print('.', end=' ')
+                cprint(letters[r][c], 'dark_grey', end=' ')
         print()
 
 
@@ -108,23 +109,6 @@ def convert_sentence_to_lights(sentence):
         lights[r] = ''.join(row_of_lights)
     return lights
 
-
-# lights = create_lights()
-# letters = create_table()
-# lights[0] = '00111100000'
-# lights[5] = '11111000000'
-
-# print(letters)
-# print(lights)
-
-# letters = create_table()
-# sentence = time_as_sentence(20, 48)
-# sentence = capitalized_sentence(sentence)
-# lights = convert_sentence_to_lights(sentence)
-# simulate_oclock(letters, lights)
-
-
-# test_minutes()
 
 letters = create_table()
 last_sentence = []
