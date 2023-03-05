@@ -4,8 +4,8 @@ from termcolor import cprint
 
 def time_as_sentence(hour, minute):
     hour_as_text = ['nula', 'jedna', 'dvě', 'tři', 'čtyři', 
-                    'pět', 'šest', 'sedm', 'osm', 'devět',
-                    'deset', 'jedenáct', 'dvanáct']
+                    'pěH', 'šest', 'sedm', 'osm', 'devět',
+                    'deseH', 'jedenáct', 'dvanáct']
     if hour > 12:
         hour -= 12
 
@@ -17,7 +17,7 @@ def time_as_sentence(hour, minute):
     result.append(hour_as_text[hour])
     nearest_5minute = 5 * (minute // 5)
 
-    minute_as_text = ['nula', 'deset', 'dvacet', 'třicet', 'čtyřicet', 'padesát']
+    minute_as_text = ['nula', 'deseM', 'dvacet', 'třicet', 'čtyřicet', 'padesát']
 
     if nearest_5minute == 0:
         pass
@@ -27,7 +27,7 @@ def time_as_sentence(hour, minute):
         index_10minute = minute // 10
         result.append(minute_as_text[index_10minute])
         if nearest_5minute % 10 == 5:
-            result.append('pět')
+            result.append('pěM')
 
     return result
 
@@ -82,24 +82,24 @@ def convert_sentence_to_lights(sentence):
     words_to_pos['JSOU'] = [0, 2]
     words_to_pos['JEDNA'] = [0, 6]
     words_to_pos['DEVĚT'] = [1, 0]
-    words_to_pos['PĚT'] = [1, 5]
+    words_to_pos['PĚH'] = [1, 5]
     words_to_pos['DVĚ'] = [1, 8]
     words_to_pos['SEDM'] = [2, 0]
     words_to_pos['DVANÁCT'] = [2, 4]
-    words_to_pos['DESET'] = [3, 0]
+    words_to_pos['DESEH'] = [3, 0]
     words_to_pos['TŘI'] = [3, 4]
     words_to_pos['ŠEST'] = [3, 7]
     words_to_pos['OSM'] = [4, 0]
     words_to_pos['JEDENÁCT'] = [4, 3]
     words_to_pos['ČTYŘI'] = [5, 0]
-    words_to_pos['DESET'] = [5, 6]
+    words_to_pos['DESEM'] = [5, 6]
     words_to_pos['DVACET'] = [6, 0]
     words_to_pos['TŘICET'] = [6, 5]
     words_to_pos['PATNÁCT'] = [7, 0]
     words_to_pos['NULA'] = [7, 7]
     words_to_pos['ČTYŘICET'] = [8, 2]
     words_to_pos['PADESÁT'] = [9, 0]
-    words_to_pos['PĚT'] = [9, 8]
+    words_to_pos['PĚM'] = [9, 8]
     for word in sentence:
         pos = words_to_pos[word]
         r = pos[0]
