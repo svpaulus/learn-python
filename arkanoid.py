@@ -8,9 +8,16 @@ black = 0, 0, 0
 screen = pygame.display.set_mode(size)
 
 ball = pygame.image.load("small_ball.png")
+platform = pygame.image.load('platform.png')
+platformrect = platform.get_rect()
+platformrect = platformrect.move([1280//2 - platformrect.width//2, 1000])
 ballrect = ball.get_rect()
-speed = [10.0, 0.0]
+ballrect = ballrect.move([1280//2, 0])
+speed = [0.0, 0.0]
 bounce_loss = 0.90
+platform_bounce = 1.10
+
+# platformrect = platformrect.move([400, 0])
 
 while True:
     for event in pygame.event.get():
@@ -27,13 +34,19 @@ while True:
         speed[0] *= -bounce_loss
 
     if ballrect.top < 0:
-        ballrect = ballrect.move([-ballrect.top, 0])
+        ballrect = ballrect.move([0, -ballrect.top])
         speed[1] *= -bounce_loss
     if ballrect.bottom > height:
         ballrect = ballrect.move([0, height-ballrect.bottom])
         speed[1] *= -bounce_loss
 
+    if ballrect.bottom > platformrect.top and ballrect.left >= platformrect.left and ballrect.right <= platformrect.right:
+        ballrect = ballrect.move([0, platformrect.top-ballrect.bottom])
+        speed[1] *= -platform_bounce
+
+
     screen.fill(black)
     screen.blit(ball, ballrect)
+    screen.blit(platform, platformrect)
     pygame.display.flip()
     time.sleep(0.02)
